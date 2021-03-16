@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "web_Dev_01_nic" {
 }
 
 # Connect the security group to the network interface
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "web_dev_nsg_Association" {
     network_interface_id      = azurerm_network_interface.web_Dev_01_nic.id
     network_security_group_id = azurerm_network_security_group.web_dev_nsg.id
 }
@@ -43,7 +43,7 @@ resource "azurerm_network_interface" "App_Dev_01_nic" {
 }
 
 # Connect the security group to the network interface
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "App_dev_nsg_Association" {
     network_interface_id      = azurerm_network_interface.App_Dev_01_nic.id
     network_security_group_id = azurerm_network_security_group.App_dev_nsg.id
 }
