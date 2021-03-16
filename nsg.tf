@@ -58,9 +58,9 @@ resource "azurerm_network_security_group" "App_dev_nsg" {
         destination_port_range     = "80"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-        
+    }
     tags = {
         environment = "Terraform Demo"
     }
-}
 
+}
