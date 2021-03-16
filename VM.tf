@@ -18,7 +18,7 @@ resource "random_id" "Dev-randomId" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "Dev-Storage" {
-    name                        = "diag${Dev-randomId.randomId.hex}"
+    name                        = "diag${randomId.Dev-randomId.hex}"
     location                    = azurerm_resource_group.rg_Dev.location
     resource_group_name         = azurerm_resource_group.rg_Dev.name
     account_tier                = "Standard"
