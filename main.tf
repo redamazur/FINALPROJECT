@@ -14,15 +14,14 @@ provider "azurerm" {
 
 
 resource "azurerm_resource_group" "rg" {
-  name = "RG_DEV2"
+  name = "FINAL_PROJECT_EP_RB" 
   location = "westeurope"
 }
 
 resource "azurerm_virtual_network" "Final_Network" {
     name                = "myVnet"
     address_space       = ["10.0.0.0/16"]
-    location            = "westeurope"
-#    resource_group_name = "RG_DEV2"
+    location            = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
     tags = {
         environment = "Terraform Demo"
@@ -37,10 +36,10 @@ resource "azurerm_subnet" "Dev-Subnet"{
 }
 
 resource "azurerm_public_ip" "Dev_publicip" {
-    name                         = "myPublicIP"
-    location                     = "westeurope"
-    resource_group_name          = azurerm_resource_group.rg.name
-    allocation_method            = "Dynamic"
+    name                 = "myPublicIP"
+    location             = azurerm_resource_group.rg.location
+    resource_group_name  = azurerm_resource_group.rg.name
+    allocation_method    = "Dynamic"
 
     tags = {
         environment = "Terraform Demo"
