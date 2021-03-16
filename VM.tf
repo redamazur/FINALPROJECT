@@ -37,9 +37,9 @@ resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
 
 
 
-#    boot_diagnostics {
-#        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
-#    }
+    boot_diagnostics {
+        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
+    }
 
     tags = {
         environment = "Terraform Demo"
