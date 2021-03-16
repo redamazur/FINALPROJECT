@@ -1,9 +1,9 @@
-resource "tls_private_key" "Dev_Web_ssh" {
-  algorithm = "RSA"
-  rsa_bits = 4096
-}
+#resource "tls_private_key" "Dev_Web_ssh" {
+#  algorithm = "RSA"
+#  rsa_bits = 4096
+#}
 
-output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
+#output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
 
 
 resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
@@ -11,7 +11,7 @@ resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
     location              = azurerm_resource_group.rg_Dev.location
     resource_group_name   = azurerm_resource_group.rg_Dev.name
     network_interface_ids = [azurerm_network_interface.web_Dev_01_nic.id]
-    size                  = "Standard_DS1_v2"
+    size                  = "Standard_B1ms"
 
     os_disk {
         name              = "Dev-Web-Disk"

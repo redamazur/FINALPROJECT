@@ -11,7 +11,7 @@ resource "azurerm_linux_virtual_machine" "Dev-App-vm" {
     location              = azurerm_resource_group.rg_Dev.location
     resource_group_name   = azurerm_resource_group.rg_Dev.name
     network_interface_ids = [azurerm_network_interface.Dev_App_01_nic.id]
-    size                  = "Standard_DS1_v2"
+    size                  = "Standard_B1ms"
 
     os_disk {
         name              = "Dev-App-Disk"
