@@ -5,8 +5,8 @@ resource "tls_private_key" "Dev_Web_ssh" {
 
 output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
 
-resource "azurerm_linux_virtual_machine" "Dev_Web_vm" {
-    name                  = "Dev_Web_VM"
+resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
+    name                  = "Dev-Web-VM"
     location              = azurerm_resource_group.rg_Dev.location
     resource_group_name   = azurerm_resource_group.rg_Dev.name
     network_interface_ids = azurerm_network_interface.web_Dev_01_nic.id
@@ -15,7 +15,7 @@ resource "azurerm_linux_virtual_machine" "Dev_Web_vm" {
     os_disk {
         name              = "Web-Dev-Disk"
         caching           = "ReadWrite"
-        # storage_account_type = "Premium_LRS"
+        # storage_account_type = "Standard_LRS"
         storage_account_type = "SSD_Premium"
     }
 
