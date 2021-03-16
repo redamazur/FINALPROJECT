@@ -47,3 +47,29 @@ resource "azurerm_network_interface_security_group_association" "App_dev_nsg_Ass
     network_interface_id      = azurerm_network_interface.Dev_App_01_nic.id
     network_security_group_id = azurerm_network_security_group.Dev_App_nsg.id
 }
+
+
+ ## inteface pour la machine App
+resource "azurerm_network_interface" "Dev_Bdd_01_nic" {
+    name                        = "Dev_Bdd_01_nic"
+    location                    = azurerm_resource_group.rg_Dev.location
+    resource_group_name         = azurerm_resource_group.rg_Dev.name
+
+    ip_configuration {
+        name                          	= "Dev_Bdd_01_nic_Configuration"
+        subnet_id                     	= azurerm_subnet.Dev_Subnet.id
+        private_ip_address_allocation 	= "static"
+	    private_ip_address 		        = "192.168.1.12"
+#        public_ip_address_id          	= azurerm_public_ip.Dev_publicip.id
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+# Connect the security group to the network interface
+resource "azurerm_network_interface_security_group_association" "Bdd_dev_nsg_Association" {
+    network_interface_id      = azurerm_network_interface.Dev_Bdd_01_nic.id
+    network_security_group_id = azurerm_network_security_group.Dev_Bdd_nsg.id
+}
