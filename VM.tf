@@ -15,8 +15,8 @@ resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
     os_disk {
         name              = "Web-Dev-Disk"
         caching           = "ReadWrite"
-        # storage_account_type = "Standard_LRS"
-        storage_account_type = "SSD_Premium"
+        # storage_account_type = "Premium_LRS"
+        storage_account_type = "Standard_LRS"
     }
 
     source_image_reference {
