@@ -3,7 +3,7 @@
   rsa_bits = 4096
 }
 
-output "tls_private_key" { value = tls_private_key.Dev_Bdd_ssh.private_key_pem }
+output "tls_private_key_Bdd" { value = tls_private_key.Dev_Bdd_ssh.private_key_pem }
 
 
 resource "azurerm_linux_virtual_machine" "Dev-Bdd-vm" {
