@@ -1,9 +1,9 @@
-# resource "tls_private_key" "Dev_Web_ssh" {
-#  algorithm = "RSA"
-#  rsa_bits = 4096
-#}
-#
-#output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
+ resource "tls_private_key" "Dev_Bdd_ssh" {
+  algorithm = "RSA"
+  rsa_bits = 4096
+}
+
+output "tls_private_key" { value = tls_private_key.Dev_Bdd_ssh.private_key_pem }
 
 
 resource "azurerm_linux_virtual_machine" "Dev-Bdd-vm" {
