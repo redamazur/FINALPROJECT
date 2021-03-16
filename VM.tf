@@ -5,35 +5,6 @@ resource "tls_private_key" "Dev_Web_ssh" {
 
 output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
 
-###################################
-
-resource "random_id" "Dev-randomId" {
-    keepers = {
-        # Generate a new ID only when a new resource group is defined
-        resource_group = azurerm_resource_group.rg_Dev.name
-    }
-
-    byte_length = 8
-}
-
-# Create storage account for boot diagnostics
-resource "azurerm_storage_account" "Dev-Storage" {
-    name                        = "diag${randomId.Dev-randomId.hex}"
-    location                    = azurerm_resource_group.rg_Dev.location
-    resource_group_name         = azurerm_resource_group.rg_Dev.name
-    account_tier                = "Standard"
-#    account_replication_type    = "LRS"
-
-    tags = {
-        environment = "Terraform Demo"
-    }
-}
-
-
-##################################
-
-
-
 
 resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
     name                  = "Dev-Web-VM"
@@ -67,9 +38,9 @@ resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
 
 
 
-    boot_diagnostics {
-        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
-    }
+#    boot_diagnostics {
+#        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
+#    }
 
     tags = {
         environment = "Terraform Demo"
