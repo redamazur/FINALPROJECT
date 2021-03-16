@@ -13,7 +13,7 @@ resource "azurerm_linux_virtual_machine" "Dev_Web_vm" {
     size                  = "Standard_DS1_v2"
 
     os_disk {
-        name              = "Web_Dev_Disk"
+        name              = "Web-Dev-Disk"
         caching           = "ReadWrite"
         # storage_account_type = "Premium_LRS"
         storage_account_type = "SSD_Premium"
@@ -26,7 +26,7 @@ resource "azurerm_linux_virtual_machine" "Dev_Web_vm" {
         version   = "latest"
     }
 
-    computer_name  = "Dev_Web_vm"
+    computer_name  = "Dev-Web-vm"
     admin_username = "azureuser"
     disable_password_authentication = true
 
@@ -37,9 +37,9 @@ resource "azurerm_linux_virtual_machine" "Dev_Web_vm" {
 
 
 
-    boot_diagnostics {
-        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
-    }
+#    boot_diagnostics {
+#        storage_account_uri = azurerm_storage_account.Dev_Storage.primary_blob_endpoint
+#    }
 
     tags = {
         environment = "Terraform Demo"
