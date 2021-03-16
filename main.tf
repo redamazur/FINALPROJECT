@@ -1,29 +1,30 @@
-# We strongly recommend using the required_providers block to set the
-# Azure Provider source and version being used
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.46.0"
+      source = "hashicorp/azurerm"
+      version = "2.51.0"
     }
   }
 }
 
-# Configure the Microsoft Azure Provider
 provider "azurerm" {
+  # Configuration options
   features {}
 }
 
-# Create a resource group
-resource "azurerm_resource_group" "RG_DEV" {
-  name     = "RG_DEV"
-  location = "West Europe"
+
+resource "azurerm_resource_group" "rg" {
+  name = "RG_DEV2"
+  location = "westus"
 }
 
-# Create a virtual network within the resource group
-resource "azurerm_virtual_network" "NETWORK_DEV" {
-  name                = "NETWORK_DEV"
-  resource_group_name = "soutenance_azure_RBEP"
-  location            = "West Europe"
-  address_space       = ["10.0.0.0/16"]
+resource "azurerm_virtual_network" "myterraformnetwork" {
+    name                = "myVnetDEV"
+    address_space       = ["10.0.0.0/16"]
+    location            = "westus"
+#    resource_group_name = "RG_DEV2"
+    resource_group_name = azurerm_resource_group.rg.name
+    tags = {
+        environment = "Terraform Demo"
+    }
 }
