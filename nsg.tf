@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "web_dev_nsg" {
-    name                = "web_dev_NetworkSecurityGroup"
+    name                = "dev_web_NetworkSecurityGroup"
     location            = azurerm_resource_group.rg_Dev.location
     resource_group_name = azurerm_resource_group.rg_Dev.name
 
@@ -32,7 +32,7 @@ resource "azurerm_network_security_group" "web_dev_nsg" {
 }
 
 resource "azurerm_network_security_group" "Dev_App_nsg" {
-    name                = "web_dev_NetworkSecurityGroup"
+    name                = "dev_App_NetworkSecurityGroup"
     location            = azurerm_resource_group.rg_Dev.location
     resource_group_name = azurerm_resource_group.rg_Dev.name
 
@@ -66,7 +66,7 @@ resource "azurerm_network_security_group" "Dev_App_nsg" {
 }
 
 resource "azurerm_network_security_group" "Dev_Bdd_nsg" {
-    name                = "Bdd_dev_NetworkSecurityGroup"
+    name                = "dev_Bdd_NetworkSecurityGroup"
     location            = azurerm_resource_group.rg_Dev.location
     resource_group_name = azurerm_resource_group.rg_Dev.name
 
