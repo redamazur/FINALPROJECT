@@ -45,5 +45,5 @@ resource "azurerm_network_interface" "Dev_App_01_nic" {
 # Connect the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "App_dev_nsg_Association" {
     network_interface_id      = azurerm_network_interface.Dev_App_01_nic.id
-    network_security_group_id = azurerm_network_security_group.Dev_App_01_nic.id
+    network_security_group_id = azurerm_network_security_group.Dev_App_nsg.id
 }
