@@ -1,3 +1,4 @@
+ ## inteface pour la machine WEB
 resource "azurerm_network_interface" "web_Dev_01_nic" {
     name                        = "web_Dev_01_nic"
     location                    = azurerm_resource_group.rg_Dev.location
