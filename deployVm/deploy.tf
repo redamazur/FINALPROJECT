@@ -1,13 +1,13 @@
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "deploygroup" {
     name     = "deployResourceGroup"
-    location = "eastus"
+    location = "West Europe"
 }
 # Create virtual network
 resource "azurerm_virtual_network" "deploynetwork" {
     name                = "myVnet"
-    address_space       = ["192.168.0.0/16"]
-    location            = "eastus"
+    address_space       = ["10.0.0.0/16"]
+    location            = "West Europe"
     resource_group_name = azurerm_resource_group.deploygroup.name
 
 }
@@ -16,19 +16,19 @@ resource "azurerm_subnet" "deployProdsubnet" {
     name                 = "deployProdsubnet"
     resource_group_name  = azurerm_resource_group.deploygroup.name
     virtual_network_name = azurerm_virtual_network.deploynetwork.name
-    address_prefixes       = ["192.168.0.0/24"]
+    address_prefixes       = ["10.0.1.0/24"]
 }
 resource "azurerm_subnet" "deployDevsubnet" {
     name                 = "deployDevsubnet"
     resource_group_name  = azurerm_resource_group.deploygroup.name
     virtual_network_name = azurerm_virtual_network.deploynetwork.name
-    address_prefixes       = ["192.168.1.0/24"]
+    address_prefixes       = ["10.0.2.0/24"]
 }
 
 # Create public IPs
 resource "azurerm_public_ip" "deploypublicip" {
     name                         = "deployPublicIP"
-    location                     = "eastus"
+    location                     = "West Europe"
     resource_group_name          = azurerm_resource_group.deploygroup.name
     allocation_method            = "Dynamic"
 }
@@ -52,7 +52,7 @@ resource "azurerm_network_security_group" "deploynsg" {
 # Create network interface
 resource "azurerm_network_interface" "deployDevNic" {
     name                      = "deployDevNic"
-    location                  = "eastus"
+    location                  = "West Europe"
     resource_group_name       = azurerm_resource_group.deploygroup.name
     ip_configuration {
         name                          = "deployNicConfiguration"
@@ -65,7 +65,7 @@ resource "azurerm_network_interface" "deployDevNic" {
 
 resource "azurerm_network_interface" "deployProdNic" {
     name                      = "deployProdNic"
-    location                  = "eastus"
+    location                  = "West Europe"
     resource_group_name       = azurerm_resource_group.deploygroup.name
     ip_configuration {
         name                          = "deployNicProdConfiguration"
@@ -96,7 +96,7 @@ output "tls_private_key" { value = tls_private_key.deploypublic_ssh.private_key_
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "deployvm" {
     name                  = "deployVM"
-    location              = "eastus"
+    location              = "West Europe"
     resource_group_name   = azurerm_resource_group.deploygroup.name
     network_interface_ids = [azurerm_network_interface.deployDevNic.id,azurerm_network_interface.deployProdNic.id]
     #primary_network_interface_id = azurerm_network_interface.deployDevNic.id
