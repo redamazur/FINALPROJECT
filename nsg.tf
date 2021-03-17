@@ -67,8 +67,8 @@ resource "azurerm_network_security_group" "Dev_App_nsg" {
 
 resource "azurerm_network_security_group" "Dev_Bdd_nsg" {
     name                = "dev_Bdd_NetworkSecurityGroup"
-    location            = data.azurerm_resource_group.deploygroup.location
-    resource_group_name = data.azurerm_resource_group.deploygroup.name
+    location            = data.azurerm_resource_group.rg_Dev.location
+    resource_group_name = data.azurerm_resource_group.rg_Dev.name
 
     security_rule {
         name                       = "SSH"
