@@ -8,8 +8,8 @@ output "tls_private_key" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
 
 resource "azurerm_linux_virtual_machine" "Dev-Web-vm" {
     name                  = "Dev-Web-VM"
-    location              = azurerm_resource_group.rg_Dev.location
-    resource_group_name   = azurerm_resource_group.rg_Dev.name
+    location              = data.azurerm_resource_group.rg_Dev.location
+    resource_group_name   = data.azurerm_resource_group.rg_Dev.name
     network_interface_ids = [azurerm_network_interface.web_Dev_01_nic.id]
     size                  = "Standard_B1ms"
 
