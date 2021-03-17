@@ -74,11 +74,11 @@ resource "azurerm_network_interface" "deployProdNic" {
     }
 }
 # Connect the security group to the network interface
-resource "azurerm_network_interface_security_group_association" "deployNsgAss" {
+resource "azurerm_network_interface_security_group_association" "deployDevNsgAss" {
     network_interface_id      = azurerm_network_interface.deployDevNic.id
     network_security_group_id = azurerm_network_security_group.deploynsg.id
 }
-resource "azurerm_network_interface_security_group_association" "deployNsgAss" {
+resource "azurerm_network_interface_security_group_association" "deployProdNsgAss" {
     network_interface_id      = azurerm_network_interface.deployProdNic.id
     network_security_group_id = azurerm_network_security_group.deploynsg.id
 }
