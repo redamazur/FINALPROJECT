@@ -1,4 +1,4 @@
-data "azurerm_resource_group" "rg_Dev" {
+data "azurerm_resources" "rg_Dev" {
   name = "deployResourceGroup" 
 }
 
