@@ -1,15 +1,12 @@
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "deploygroup" {
     name     = "deployResourceGroup"
-    location = "eastus"
-
 }
 
 # Create virtual network
 resource "azurerm_virtual_network" "deploynetwork" {
     name                = "myVnet"
     address_space       = ["192.168.0.0/16"]
-    location            = "eastus"
     resource_group_name = azurerm_resource_group.deploygroup.name
 
 
@@ -26,7 +23,6 @@ resource "azurerm_subnet" "deploysubnet" {
 # Create public IPs
 resource "azurerm_public_ip" "deploypublicip" {
     name                         = "deployPublicIP"
-    location                     = "eastus"
     resource_group_name          = azurerm_resource_group.deploygroup.name
     allocation_method            = "Dynamic"
 
@@ -35,7 +31,6 @@ resource "azurerm_public_ip" "deploypublicip" {
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "deploynsg" {
     name                = "deployNetworkSecurityGroup"
-    location            = "eastus"
     resource_group_name = azurerm_resource_group.deploygroup.name
 
     security_rule {
@@ -55,7 +50,6 @@ resource "azurerm_network_security_group" "deploynsg" {
 # Create network interface
 resource "azurerm_network_interface" "deploynic" {
     name                      = "deployNIC"
-    location                  = "eastus"
     resource_group_name       = azurerm_resource_group.deploygroup.name
 
     ip_configuration {
@@ -83,7 +77,6 @@ output "tls_private_key" { value = tls_private_key.deploypublic_ssh.private_key_
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "deployvm" {
     name                  = "deployVM"
-    location              = "eastus"
     resource_group_name   = azurerm_resource_group.deploygroup.name
     network_interface_ids = [azurerm_network_interface.deploynic.id]
     size                  = "Standard_DS1_v2"
