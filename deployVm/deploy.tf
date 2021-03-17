@@ -6,19 +6,23 @@ resource "azurerm_resource_group" "deploygroup" {
 # Create virtual network
 resource "azurerm_virtual_network" "deploynetwork" {
     name                = "myVnet"
-    address_space       = ["10.0.0.0/16"]
     address_space       = ["192.168.0.0/16"]
     location            = "eastus"
     resource_group_name = azurerm_resource_group.deploygroup.name
 
 }
 # Create subnet
-resource "azurerm_subnet" "deploysubnet" {
-    name                 = "deploySubnet"
+resource "azurerm_subnet" "deployProdsubnet" {
+    name                 = "deployProdsubnet"
     resource_group_name  = azurerm_resource_group.deploygroup.name
     virtual_network_name = azurerm_virtual_network.deploynetwork.name
-    address_prefixes       = ["10.0.0.0/16"]
     address_prefixes       = ["192.168.0.0/16"]
+}
+resource "azurerm_subnet" "deployDevsubnet" {
+    name                 = "deployDevsubnet"
+    resource_group_name  = azurerm_resource_group.deploygroup.name
+    virtual_network_name = azurerm_virtual_network.deploynetwork.name
+    address_prefixes       = ["192.168.1.0/16"]
 }
 
 # Create public IPs
@@ -46,38 +50,27 @@ resource "azurerm_network_security_group" "deploynsg" {
     }
 }
 # Create network interface
-resource "azurerm_network_interface" "deployDevnic" {
-    name                      = "deployDevnic"
-    location                  = "eastus"
-    resource_group_name       = azurerm_resource_group.deploygroup.name
-    ip_configuration {
-        name                          = "deployNicConfiguration"
-        subnet_id                     = azurerm_subnet.deploysubnet.id
-        private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = azurerm_public_ip.deploypublicip.id
-    }
-}
-# Create network interface
-resource "azurerm_network_interface" "deployDevnic" {
+resource "azurerm_network_interface" "deployDevNic" {
     name                      = "deployDevNic"
     location                  = "eastus"
     resource_group_name       = azurerm_resource_group.deploygroup.name
     ip_configuration {
-        name                          = "deployNicDevConfiguration"
-        subnet_id                     = azurerm_subnet.deploysubnet.id
+        name                          = "deployNicConfiguration"
+        subnet_id                     = azurerm_subnet.deployDevsubnet.id
         private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = azurerm_public_ip.deploypublicip.id
     }
 }
+
+
 resource "azurerm_network_interface" "deployProdNic" {
     name                      = "deployProdNic"
     location                  = "eastus"
     resource_group_name       = azurerm_resource_group.deploygroup.name
     ip_configuration {
         name                          = "deployNicProdConfiguration"
-        subnet_id                     = azurerm_subnet.deploysubnet.id
+        subnet_id                     = azurerm_subnet.deployProdsubnet.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = azurerm_public_ip.deploypublicip.id
     }
 }
 # Connect the security group to the network interface
