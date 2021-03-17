@@ -1,8 +1,8 @@
  ## inteface pour la machine WEB
 resource "azurerm_network_interface" "web_Dev_01_nic" {
     name                        = "web_Dev_01_nic"
-    location                    = azurerm_resource_group.rg_Dev.location
-    resource_group_name         = azurerm_resource_group.rg_Dev.name
+    location                    = data.azurerm_resource_group.rg_Dev.location
+    resource_group_name         = data.azurerm_resource_group.rg_Dev.name
 
     ip_configuration {
         name                          	= "web_Dev_01_nic_Configuration"
@@ -26,8 +26,8 @@ resource "azurerm_network_interface_security_group_association" "web_dev_nsg_Ass
  ## inteface pour la machine App
 resource "azurerm_network_interface" "Dev_App_01_nic" {
     name                        = "Dev_App_01_nic"
-    location                    = azurerm_resource_group.rg_Dev.location
-    resource_group_name         = azurerm_resource_group.rg_Dev.name
+    location                    = data.azurerm_resource_group.rg_Dev.location
+    resource_group_name         = data.azurerm_resource_group.rg_Dev.name
 
     ip_configuration {
         name                          	= "Dev_App_01_nic_Configuration"
