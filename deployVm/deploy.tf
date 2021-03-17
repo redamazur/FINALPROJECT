@@ -46,8 +46,8 @@ resource "azurerm_network_security_group" "deploynsg" {
     }
 }
 # Create network interface
-resource "azurerm_network_interface" "deploynic" {
-    name                      = "deployNIC"
+resource "azurerm_network_interface" "deployDevnic" {
+    name                      = "deployDevnic"
     location                  = "eastus"
     resource_group_name       = azurerm_resource_group.deploygroup.name
     ip_configuration {
@@ -57,23 +57,56 @@ resource "azurerm_network_interface" "deploynic" {
         public_ip_address_id          = azurerm_public_ip.deploypublicip.id
     }
 }
+# Create network interface
+resource "azurerm_network_interface" "deployDevnic" {
+    name                      = "deployDevNic"
+    location                  = "eastus"
+    resource_group_name       = azurerm_resource_group.deploygroup.name
+    ip_configuration {
+        name                          = "deployNicDevConfiguration"
+        subnet_id                     = azurerm_subnet.deploysubnet.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.deploypublicip.id
+    }
+}
+resource "azurerm_network_interface" "deployProdNic" {
+    name                      = "deployProdNic"
+    location                  = "eastus"
+    resource_group_name       = azurerm_resource_group.deploygroup.name
+    ip_configuration {
+        name                          = "deployNicProdConfiguration"
+        subnet_id                     = azurerm_subnet.deploysubnet.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.deploypublicip.id
+    }
+}
 # Connect the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "deployNsgAss" {
-    network_interface_id      = azurerm_network_interface.deploynic.id
+    network_interface_id      = azurerm_network_interface.deployDevNic.id
     network_security_group_id = azurerm_network_security_group.deploynsg.id
 }
+resource "azurerm_network_interface_security_group_association" "deployNsgAss" {
+    network_interface_id      = azurerm_network_interface.deployProdNic.id
+    network_security_group_id = azurerm_network_security_group.deploynsg.id
+}
+
+
+
 # Create (and display) an SSH key
 resource "tls_private_key" "deploypublic_ssh" {
   algorithm = "RSA"
   rsa_bits = 4096
 }
 output "tls_private_key" { value = tls_private_key.deploypublic_ssh.private_key_pem }
+
+
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "deployvm" {
     name                  = "deployVM"
     location              = "eastus"
     resource_group_name   = azurerm_resource_group.deploygroup.name
-    network_interface_ids = [azurerm_network_interface.deploynic.id]
+    network_interface_ids = [azurerm_network_interface.deployDevNic.id]
+    network_interface_ids = [azurerm_network_interface.deployProdNic.id]
     size                  = "Standard_DS1_v2"
     os_disk {
         name              = "deployOsDisk"
