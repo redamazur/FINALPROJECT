@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "deploygroup" {
 # Create virtual network
 resource "azurerm_virtual_network" "deploynetwork" {
     name                = "myVnet"
-    address_space       = ["10.0.0.0/16"]
+    address_space       = ["192.168.0.0/16"]
     location            = "eastus"
     resource_group_name = azurerm_resource_group.deploygroup.name
 
@@ -20,7 +20,7 @@ resource "azurerm_subnet" "deploysubnet" {
     name                 = "deploySubnet"
     resource_group_name  = azurerm_resource_group.deploygroup.name
     virtual_network_name = azurerm_virtual_network.deploynetwork.name
-    address_prefixes       = ["10.0.0.0/16"]
+    address_prefixes       = ["192.168.0.0/16"]
 }
 
 # Create public IPs
