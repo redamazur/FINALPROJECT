@@ -99,7 +99,7 @@ resource "azurerm_linux_virtual_machine" "deployvm" {
     location              = "eastus"
     resource_group_name   = azurerm_resource_group.deploygroup.name
     network_interface_ids = [azurerm_network_interface.deployDevNic.id,azurerm_network_interface.deployProdNic.id]
-    primary_network_interface_id = azurerm_network_interface.deployDevNic.id
+    #primary_network_interface_id = azurerm_network_interface.deployDevNic.id
     size                  = "Standard_DS1_v2"
     os_disk {
         name              = "deployOsDisk"
