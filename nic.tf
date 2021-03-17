@@ -8,7 +8,7 @@ resource "azurerm_network_interface" "web_Dev_01_nic" {
         name                          	= "web_Dev_01_nic_Configuration"
         subnet_id                     	= azurerm_subnet.Dev_Subnet.id
         private_ip_address_allocation 	= "static"
-	    private_ip_address 		        = "192.168.1.10"
+	private_ip_address 		= "10.0.1.10"
         public_ip_address_id          	= azurerm_public_ip.Dev_publicip.id
     }
 
@@ -33,7 +33,7 @@ resource "azurerm_network_interface" "Dev_App_01_nic" {
         name                          	= "Dev_App_01_nic_Configuration"
         subnet_id                     	= azurerm_subnet.Dev_Subnet.id
         private_ip_address_allocation 	= "static"
-	    private_ip_address 		        = "192.168.1.11"
+	    private_ip_address 		        = "10.0.1.11"
 #        public_ip_address_id          	= azurerm_public_ip.Dev_publicip.id
     }
 
@@ -59,7 +59,7 @@ resource "azurerm_network_interface" "Dev_Bdd_01_nic" {
         name                          	= "Dev_Bdd_01_nic_Configuration"
         subnet_id                     	= azurerm_subnet.Dev_Subnet.id
         private_ip_address_allocation 	= "static"
-	    private_ip_address 		        = "192.168.1.12"
+	    private_ip_address 		        = "10.0.1.12"
 #        public_ip_address_id          	= azurerm_public_ip.Dev_publicip.id
     }
 
