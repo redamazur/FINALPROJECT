@@ -1,10 +1,3 @@
- resource "tls_private_key" "Dev_App_ssh" {
-  algorithm = "RSA"
-  rsa_bits = 4096
-}
-
-output "tls_private_key_App" { value = tls_private_key.Dev_Web_ssh.private_key_pem }
-
 
 resource "azurerm_linux_virtual_machine" "Dev-App-vm" {
     name                  = "Dev-App-VM"

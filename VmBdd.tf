@@ -1,11 +1,3 @@
-# resource "tls_private_key" "Dev_Bdd_ssh" {
-#  algorithm = "RSA"
-#  rsa_bits = 4096
-#}
-
-#output "tls_private_key_Bdd" { value = tls_private_key.Dev_Bdd_ssh.private_key_pem }
-
-
 resource "azurerm_linux_virtual_machine" "Dev-Bdd-vm" {
     name                  = "Dev-Bdd-VM"
     location              = azurerm_resource_group.rg_Dev.location
