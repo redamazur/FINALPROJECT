@@ -1,17 +1,10 @@
- resource "tls_private_key" "Dev_App_ssh" {
-  algorithm = "RSA"
-  rsa_bits = 4096
-}
-
-output "tls_private_key_App" { value = tls_private_key.Dev_App_ssh.private_key_pem }
-
 
 resource "azurerm_linux_virtual_machine" "Dev-App-vm" {
     name                  = "Dev-App-VM"
     location              = azurerm_resource_group.rg_Dev.location
     resource_group_name   = azurerm_resource_group.rg_Dev.name
     network_interface_ids = [azurerm_network_interface.Dev_App_01_nic.id]
-    size                  = "Standard_DS1_v2"
+    size                  = "Standard_B1ms"
 
     os_disk {
         name              = "Dev-App-Disk"
