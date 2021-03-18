@@ -2,7 +2,7 @@ resource "azurerm_linux_virtual_machine" "Prod-App-vm" {
     name                  = "Prod-App-VM"
     location              = data.azurerm_resource_group.rg_Dev.location
     resource_group_name   = data.azurerm_resource_group.rg_Dev.name
-    network_interface_ids = [azurerm_network_interface.App_Prod_01_nic.id]
+    network_interface_ids = [azurerm_network_interface.Prod_App_01_nic.id]
     size                  = "Standard_B1ms"
 
     os_disk {
@@ -25,7 +25,7 @@ resource "azurerm_linux_virtual_machine" "Prod-App-vm" {
 
     admin_ssh_key {
         username       = "azureuser"
-        public_key     = tls_private_key.Prod_Web_ssh.public_key_openssh
+        public_key     = tls_private_key.Dev_Web_ssh.public_key_openssh
     }
 
 
