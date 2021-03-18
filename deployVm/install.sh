@@ -9,6 +9,7 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install terraform
 
 ### installation ansible
+sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt-get install ansible -y
 
 git clone https://github.com/redamazur/FINALPROJECT.git
