@@ -1,3 +1,4 @@
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 az account set --subscription "a94e75c3-eb53-4976-9cbf-eac8d430d6d4"
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
