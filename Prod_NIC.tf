@@ -8,7 +8,7 @@ resource "azurerm_network_interface" "web_Prod_01_nic" {
         name                          	= "web_Prod_01_nic_Configuration"
         subnet_id                     	= data.azurerm_subnet.Prod_Subnet.id
         private_ip_address_allocation 	= "static"
-	private_ip_address 		= "10.0.2.10"
+	private_ip_address 		= "10.0.1.10"
         public_ip_address_id          	= azurerm_public_ip.Prod_publicip.id
     }
 
@@ -33,7 +33,7 @@ resource "azurerm_network_interface" "Prod_App_01_nic" {
         name                          	= "Prod_App_01_nic_Configuration"
         subnet_id                     	= data.azurerm_subnet.Prod_Subnet.id
         private_ip_address_allocation 	= "static"
-	    private_ip_address 		        = "10.0.2.11"
+	    private_ip_address 		        = "10.0.1.11"
     }
 
     tags = {
@@ -58,7 +58,7 @@ resource "azurerm_network_interface" "Prod_Bdd_01_nic" {
         name                          	= "Prod_Bdd_01_nic_Configuration"
         subnet_id                     	= data.azurerm_subnet.Prod_Subnet.id
         private_ip_address_allocation 	= "static"
-	    private_ip_address 		        = "10.0.2.12"
+	    private_ip_address 		        = "10.0.1.12"
     }
 
     tags = {
