@@ -33,4 +33,3 @@ resource "azurerm_linux_virtual_machine" "Prod-Bdd-vm" {
         environment = "Terraform Demo"
     }
 }
-© 2021 GitHub, Inc.
