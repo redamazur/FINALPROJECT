@@ -14,8 +14,8 @@ terraform init
 terraform plan -out terraform_plan.tfplan
 terraform apply terraform_plan.tfplan
 ####il faut enregistrer la clé sur ~/AnsibleEPRB/sslFile.pem #####
-vi ~/AnsibleEPRB/sslFile.pem
-
-cd ../AnsibleEPRB
-ansible-playbook terraformeRepo.yaml
+echo vi ~/AnsibleEPRB/sslFile.pem
+chmod 0400 ~/AnsibleEPRB/sslFile.pem
+echo cd ../AnsibleEPRB
+echo  ansible-playbook Dev_Web_installation.yaml
 pause
