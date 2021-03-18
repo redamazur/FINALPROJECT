@@ -35,7 +35,7 @@ resource "azurerm_public_ip" "deploypublicip" {
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "deploynsg" {
     name                = "deployNetworkSecurityGroup"
-    location            = "eastus"
+    location            = "West Europe"
     resource_group_name = azurerm_resource_group.deploygroup.name
     security_rule {
         name                       = "SSH"
@@ -80,7 +80,7 @@ resource "azurerm_network_interface_security_group_association" "deployDevNsgAss
 }
 #resource "azurerm_network_interface_security_group_association" "deployProdNsgAss" {
 #    network_interface_id      = azurerm_network_interface.deployProdNic.id
-#    network_security_group_id = azurerm_network_security_group.deploynsg.id
+#    network_security_group_id = azurerm_network_security_group.deploynsg.id 
 #}
 
 
