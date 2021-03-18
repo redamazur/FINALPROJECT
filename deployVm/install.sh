@@ -7,8 +7,15 @@ sudo apt-get install ansible -y
 git clone https://github.com/redamazur/FINALPROJECT.git
 git clone https://github.com/redamazur/AnsibleEPRB.git
 cd FINALPROJECT/
+az login
+####il faut s'identifier sur Azure #####
+cd ..
 terraform init
 terraform plan -out terraform_plan.tfplan
 terraform apply terraform_plan.tfplan
+####il faut enregistrer la clé sur ~/AnsibleEPRB/sslFile.pem #####
+vi ~/AnsibleEPRB/sslFile.pem
+
 cd ../AnsibleEPRB
 ansible-playbook terraformeRepo.yaml
+pause
